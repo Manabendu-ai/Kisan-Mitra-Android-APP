@@ -14,9 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.riku.kisanmitra.R
 import com.riku.kisanmitra.domain.model.UserRole
 
 @Composable
@@ -24,10 +26,10 @@ fun RoleSelectionScreen(
     onRoleSelected: (UserRole) -> Unit
 ) {
     val roles = listOf(
-        RoleItem("Farmer", Icons.Default.Agriculture, UserRole.FARMER, "Sell crops, track earnings"),
-        RoleItem("Buyer", Icons.Default.Storefront, UserRole.BUYER, "Buy fresh produce directly"),
-        RoleItem("Driver", Icons.Default.LocalShipping, UserRole.DRIVER, "Deliver goods, earn per trip"),
-        RoleItem("Trader", Icons.Default.Person, UserRole.TRADER, "Coordinate supply chain")
+        RoleItem(stringResource(R.string.role_farmer), Icons.Default.Agriculture, UserRole.FARMER, stringResource(R.string.role_farmer_desc)),
+        RoleItem(stringResource(R.string.role_buyer), Icons.Default.Storefront, UserRole.BUYER, stringResource(R.string.role_buyer_desc)),
+        RoleItem(stringResource(R.string.role_driver), Icons.Default.LocalShipping, UserRole.DRIVER, stringResource(R.string.role_driver_desc)),
+        RoleItem(stringResource(R.string.role_trader), Icons.Default.Person, UserRole.TRADER, stringResource(R.string.role_trader_desc))
     )
 
     Column(
@@ -38,13 +40,13 @@ fun RoleSelectionScreen(
     ) {
         Spacer(modifier = Modifier.height(48.dp))
         Text(
-            text = "Choose Your Role",
+            text = stringResource(R.string.choose_role),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = "Select how you want to use Kisan Mitra",
+            text = stringResource(R.string.select_role_desc),
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(top = 8.dp, bottom = 32.dp)
         )

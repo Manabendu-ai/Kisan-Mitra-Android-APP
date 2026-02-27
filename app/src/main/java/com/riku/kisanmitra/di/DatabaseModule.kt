@@ -21,7 +21,9 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             "kisan_mitra_db"
-        ).build()
+        )
+        .fallbackToDestructiveMigration() // Allow destructive migration for demo purposes
+        .build()
     }
 
     @Provides

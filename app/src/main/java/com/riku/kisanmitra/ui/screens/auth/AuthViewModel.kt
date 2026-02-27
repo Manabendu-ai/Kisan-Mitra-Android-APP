@@ -29,12 +29,30 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun register(name: String, phoneNumber: String, role: UserRole) {
+    fun register(name: String, phoneNumber: String, pin: String, role: UserRole) {
         viewModelScope.launch {
             _authState.value = UiState.Loading
-            authRepository.register(name, phoneNumber, role)
+            authRepository.register(name, phoneNumber, pin, role)
                 .onSuccess { _authState.value = UiState.Success(it) }
                 .onFailure { _authState.value = UiState.Error(it.message ?: "Registration failed") }
+        }
+    }
+
+    fun verifyOtp(phoneNumber: String, otp: String) {
+        viewModelScope.launch {
+            _authState.value = UiState.Loading
+            authRepository.verifyOtp(phoneNumber, otp)
+                .onSuccess { _authState.value = UiState.Success(it) }
+                .onFailure { _authState.value = UiState.Error(it.message ?: "Invalid OTP") }
+        }
+    }
+
+    fun verifyPin(phoneNumber: String, pin: String) {
+        viewModelScope.launch {
+            _authState.value = UiState.Loading
+            authRepository.verifyPin(phoneNumber, pin)
+                .onSuccess { _authState.value = UiState.Success(it) }
+                .onFailure { _authState.value = UiState.Error(it.message ?: "Invalid PIN") }
         }
     }
 

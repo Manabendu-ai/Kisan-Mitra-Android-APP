@@ -2,9 +2,11 @@ package com.riku.kisanmitra.ui.screens.farmer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.riku.kisanmitra.data.pref.UserPreferences
 import com.riku.kisanmitra.domain.model.*
 import com.riku.kisanmitra.domain.repository.MarketRepository
 import com.riku.kisanmitra.ui.state.UiState
+import com.riku.kisanmitra.util.TtsManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -14,7 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FarmerViewModel @Inject constructor(
-    private val repository: MarketRepository
+    private val repository: MarketRepository,
+    private val ttsManager: TtsManager,
+    private val userPreferences: UserPreferences
 ) : ViewModel() {
 
     private val _listingsState = MutableStateFlow<UiState<List<Listing>>>(UiState.Loading)
@@ -43,8 +47,37 @@ class FarmerViewModel @Inject constructor(
         viewModelScope.launch {
             _aiAdviceState.value = UiState.Loading
             repository.getAiPriceAdvice(cropType, quantity)
-                .onSuccess { _aiAdviceState.value = UiState.Success(it) }
+                .onSuccess { advice ->
+                    _aiAdviceState.value = UiState.Success(advice)
+                    speakAdvice(advice)
+                }
                 .onFailure { _aiAdviceState.value = UiState.Error(it.message ?: "Error") }
+        }
+    }
+    
+    fun speakAdvice(advice: AiPriceAdvice) {
+        viewModelScope.launch {
+            val lang = userPreferences.language.first()
+            val textToSpeak = if (lang == "kn" || lang == "Kannada") {
+                "ನಿಮ್ಮ ಬೆಳೆಗಳಿಗೆ AI ಬೆಲೆ ಮಾಹಿತಿ. " +
+                "ಪ್ರಸ್ತುತ ಮಾರುಕಟ್ಟೆ ಬೆಲೆ ${advice.currentPrice} ರೂಪಾಯಿಗಳು. " +
+                "24 ಗಂಟೆಗಳಲ್ಲಿ ಅಂದಾಜು ಬೆಲೆ ${advice.predicted24h} ರೂಪಾಯಿಗಳು. " +
+                "ನಮ್ಮ ಸಲಹೆ: ${advice.recommendation}. ${advice.reasonText}"
+            } else {
+                "AI Price Insight for your crops. " +
+                "Current market price is ${advice.currentPrice} rupees. " +
+                "Predicted price in 24 hours is ${advice.predicted24h} rupees. " +
+                "Our recommendation: ${advice.recommendation}. ${advice.reasonText}"
+            }
+            ttsManager.speak(textToSpeak, lang)
+        }
+    }
+
+    fun speakPrompt(englishPrompt: String, kannadaPrompt: String) {
+        viewModelScope.launch {
+            val lang = userPreferences.language.first()
+            val text = if (lang == "kn" || lang == "Kannada") kannadaPrompt else englishPrompt
+            ttsManager.speak(text, lang)
         }
     }
 
@@ -79,5 +112,10 @@ class FarmerViewModel @Inject constructor(
             repository.createListing(listing)
             onListingPosted()
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        ttsManager.stop()
     }
 }

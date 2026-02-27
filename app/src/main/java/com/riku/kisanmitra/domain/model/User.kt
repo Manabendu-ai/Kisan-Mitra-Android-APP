@@ -8,6 +8,7 @@ data class User(
     @PrimaryKey val id: String,
     val name: String,
     val phoneNumber: String,
+    val pin: String = "",
     val role: UserRole,
     val location: String = "",
     val isLoggedIn: Boolean = false

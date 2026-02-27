@@ -17,7 +17,7 @@ class UserPreferences @Inject constructor(
         val ROLE_KEY = stringPreferencesKey("role")
     }
 
-    val language: Flow<String> = dataStore.data.map { it[LANGUAGE_KEY] ?: "English" }
+    val language: Flow<String> = dataStore.data.map { it[LANGUAGE_KEY] ?: "en" }
     val role: Flow<UserRole> = dataStore.data.map { 
         val roleStr = it[ROLE_KEY] ?: UserRole.NONE.name
         UserRole.valueOf(roleStr)

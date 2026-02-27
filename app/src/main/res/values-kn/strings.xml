@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">ಕಿಸಾನ್ ಮಿತ್ರ</string>
+    <string name="welcome_motto">ನಾವು ಸಂಪರ್ಕಿಸಲು ಇಲ್ಲಿದ್ದೇವೆ, ನಿಯಂತ್ರಿಸಲು ಅಲ್ಲ</string>
+    <string name="change_language_later">ನೀವು ನಂತರ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಬದಲಾಯಿಸಬಹುದು</string>
+    <string name="choose_role">ನಿಮ್ಮ ಪಾತ್ರವನ್ನು ಆರಿಸಿ</string>
+    <string name="select_role_desc">ನೀವು ಕಿಸಾನ್ ಮಿತ್ರವನ್ನು ಹೇಗೆ ಬಳಸಲು ಬಯಸುತ್ತೀರಿ ಎಂಬುದನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+
+    <string name="role_farmer">ರೈತ</string>
+    <string name="role_farmer_desc">ಬೆಳೆಗಳನ್ನು ಮಾರಿ, ಆದಾಯವನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ</string>
+    <string name="role_buyer">ಖರೀದಿದಾರ</string>
+    <string name="role_buyer_desc">ತಾಜಾ ಉತ್ಪನ್ನಗಳನ್ನು ನೇರವಾಗಿ ಖರೀದಿಸಿ</string>
+    <string name="role_driver">ಚಾಲಕ</string>
+    <string name="role_driver_desc">ಸರಕುಗಳನ್ನು ತಲುಪಿಸಿ, ಪ್ರತಿ ಪ್ರವಾಸಕ್ಕೆ ಸಂಪಾದಿಸಿ</string>
+    <string name="role_trader">ವ್ಯಾಪಾರಿ</string>
+    <string name="role_trader_desc">ಪೂರೈಕೆ ಸರಪಳಿಯನ್ನು ಸಂಯೋಜಿಸಿ</string>
+
+    <string name="login_as">%1$s ಆಗಿ ಲಾಗ್ ಇನ್ ಮಾಡಿ</string>
+    <string name="welcome_back">ಮರಳಿ ಸ್ವಾಗತ</string>
+    <string name="enter_phone_login">ಮುಂದುವರಿಯಲು ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="phone_number">ಫೋನ್ ಸಂಖ್ಯೆ</string>
+    <string name="login">ಲಾಗ್ ಇನ್</string>
+    <string name="dont_have_account">ಖಾತೆ ಇಲ್ಲವೇ? ನೋಂದಾಯಿಸಿ</string>
+
+    <string name="register_as">%1$s ಆಗಿ ನೋಂದಾಯಿಸಿ</string>
+    <string name="create_account">ಖಾತೆಯನ್ನು ರಚಿಸಿ</string>
+    <string name="join_community">ಕಿಸಾನ್ ಮಿತ್ರ ಸಮುದಾಯಕ್ಕೆ ಸೇರಿ</string>
+    <string name="full_name">ಪೂರ್ಣ ಹೆಸರು</string>
+    <string name="register">ನೋಂದಾಯಿಸಿ</string>
+    <string name="already_have_account">ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ? ಲಾಗ್ ಇನ್ ಮಾಡಿ</string>
+
+    <string name="verify_otp">OTP ಪರಿಶೀಲಿಸಿ</string>
+    <string name="enter_verification_code">ಪರಿಶೀಲನಾ ಕೋಡ್ ನಮೂದಿಸಿ</string>
+    <string name="otp_sent_to">ನಾವು %1$s ಗೆ 6-ಅಂಕಿಯ ಕೋಡ್ ಅನ್ನು ಕಳುಹಿಸಿದ್ದೇವೆ</string>
+    <string name="otp_label">6-ಅಂಕಿಯ OTP</string>
+    <string name="verify_login">ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಲಾಗ್ ಇನ್ ಮಾಡಿ</string>
+    <string name="resend_otp">OTP ಮರುಕಳುಹಿಸಿ</string>
+    <string name="resend_otp_in">%1$d ಸೆಕೆಂಡುಗಳಲ್ಲಿ OTP ಮರುಕಳುಹಿಸಿ</string>
+</resources>

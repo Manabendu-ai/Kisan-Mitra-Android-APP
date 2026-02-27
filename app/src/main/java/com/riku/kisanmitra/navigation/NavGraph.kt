@@ -63,17 +63,8 @@ fun NavGraph(
             val role = UserRole.valueOf(roleName)
             LoginScreen(
                 role = role,
-                onLoginSuccess = {
-                    val route = when (role) {
-                        UserRole.FARMER -> Screen.FarmerDashboard.route
-                        UserRole.BUYER -> Screen.BuyerDashboard.route
-                        UserRole.DRIVER -> Screen.DriverDashboard.route
-                        UserRole.TRADER -> Screen.TraderDashboard.route
-                        else -> Screen.BuyerDashboard.route
-                    }
-                    navController.navigate(route) {
-                        popUpTo(Screen.LanguageSelection.route) { inclusive = true }
-                    }
+                onLoginSuccess = { phoneNumber ->
+                    navController.navigate(Screen.Pin.createRoute(phoneNumber))
                 },
                 onNavigateToRegister = {
                     navController.navigate(Screen.Register.createRoute(roleName))
@@ -105,6 +96,29 @@ fun NavGraph(
                 onNavigateToLogin = {
                     navController.navigate(Screen.Login.createRoute(roleName)) {
                         popUpTo(Screen.Register.route) { inclusive = true }
+                    }
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screen.Pin.route,
+            arguments = listOf(navArgument("phoneNumber") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val phoneNumber = backStackEntry.arguments?.getString("phoneNumber") ?: ""
+            PinScreen(
+                phoneNumber = phoneNumber,
+                onVerificationSuccess = {
+                    val route = when (selectedRole) {
+                        UserRole.FARMER -> Screen.FarmerDashboard.route
+                        UserRole.BUYER -> Screen.BuyerDashboard.route
+                        UserRole.DRIVER -> Screen.DriverDashboard.route
+                        UserRole.TRADER -> Screen.TraderDashboard.route
+                        else -> Screen.BuyerDashboard.route
+                    }
+                    navController.navigate(route) {
+                        popUpTo(Screen.LanguageSelection.route) { inclusive = true }
                     }
                 },
                 onBack = { navController.popBackStack() }

@@ -9,6 +9,12 @@ sealed class Screen(val route: String) {
     object Register : Screen("register/{role}") {
         fun createRoute(role: String) = "register/$role"
     }
+    object Otp : Screen("otp/{phoneNumber}") {
+        fun createRoute(phoneNumber: String) = "otp/$phoneNumber"
+    }
+    object Pin : Screen("pin/{phoneNumber}") {
+        fun createRoute(phoneNumber: String) = "pin/$phoneNumber"
+    }
 
     // Farmer
     object FarmerDashboard : Screen("farmer_dashboard")

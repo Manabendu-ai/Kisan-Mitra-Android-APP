@@ -39,6 +39,12 @@ android {
     buildFeatures {
         compose = true
     }
+
+    sourceSets {
+        getByName("main") {
+            assets.srcDirs("src/main/java/com/riku/kisanmitra/datasets")
+        }
+    }
 }
 
 kapt {
@@ -47,6 +53,7 @@ kapt {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -58,6 +65,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     
+    // TFLite
+    implementation("org.tensorflow:tensorflow-lite:2.14.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-select-tf-ops:2.14.0")
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)

@@ -1,5 +1,6 @@
 package com.riku.kisanmitra.domain.model
 
+import com.riku.kisanmitra.R
 import java.util.Date
 import java.util.Locale
 
@@ -26,12 +27,17 @@ data class Listing(
     val status: ListingStatus = ListingStatus.ACTIVE,
     val farmerTrustScore: Float = 4.5f
 ) {
-    val displayImage: String
+    val displayImage: Any
         get() = images.firstOrNull() ?: when (cropName.lowercase(Locale.ROOT).trim()) {
-            "onion" -> "https://cdn.pixabay.com/photo/2016/05/04/13/46/onion-1371434_1280.jpg"
-            "potato" -> "https://cdn.pixabay.com/photo/2016/08/11/08/04/potatoes-1585060_1280.jpg"
-            "tomato" -> "https://cdn.pixabay.com/photo/2011/03/16/16/01/tomatoes-5356_1280.jpg"
-            else -> "https://cdn.pixabay.com/photo/2017/06/10/07/22/vegetables-2389216_1280.png" // Default generic veg
+            "cabbage" -> R.drawable.cabbage
+            "cauliflower" -> R.drawable.cauliflower
+            "chilli" -> R.drawable.chilli
+            "capcicum" -> R.drawable.capcicum
+            "carrot" -> R.drawable.carrot
+            "onion" -> R.drawable.onion
+            "tomato" -> R.drawable.tomato
+            "potato" -> R.drawable.potato
+            else -> R.drawable.kisan_mitra_logo
         }
 }
 

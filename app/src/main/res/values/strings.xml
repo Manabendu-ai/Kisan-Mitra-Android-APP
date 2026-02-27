@@ -1,3 +1,38 @@
 <resources>
     <string name="app_name">Kisan Mitra</string>
+    <string name="welcome_motto">We are here to connect not to control</string>
+    <string name="change_language_later">You can change your language later in Settings</string>
+    <string name="choose_role">Choose Your Role</string>
+    <string name="select_role_desc">Select how you want to use Kisan Mitra</string>
+
+    <string name="role_farmer">Farmer</string>
+    <string name="role_farmer_desc">Sell crops, track earnings</string>
+    <string name="role_buyer">Buyer</string>
+    <string name="role_buyer_desc">Buy fresh produce directly</string>
+    <string name="role_driver">Driver</string>
+    <string name="role_driver_desc">Deliver goods, earn per trip</string>
+    <string name="role_trader">Trader</string>
+    <string name="role_trader_desc">Coordinate supply chain</string>
+
+    <string name="login_as">Login as %1$s</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="enter_phone_login">Enter your phone number to continue</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="login">Login</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+
+    <string name="register_as">Register as %1$s</string>
+    <string name="create_account">Create Account</string>
+    <string name="join_community">Join the Kisan Mitra community</string>
+    <string name="full_name">Full Name</string>
+    <string name="register">Register</string>
+    <string name="already_have_account">Already have an account? Login</string>
+
+    <string name="verify_otp">Verify OTP</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+    <string name="otp_sent_to">We sent a 6-digit code to %1$s</string>
+    <string name="otp_label">6-Digit OTP</string>
+    <string name="verify_login">Verify &amp; Login</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="resend_otp_in">Resend OTP in %1$d s</string>
 </resources>
