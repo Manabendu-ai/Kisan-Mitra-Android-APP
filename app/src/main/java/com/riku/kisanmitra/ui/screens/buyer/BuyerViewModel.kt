@@ -54,4 +54,10 @@ class BuyerViewModel @Inject constructor(
             repository.placeOrder(order)
         }
     }
+
+    fun updateListingPrice(listingId: String, newPrice: Double) {
+        viewModelScope.launch {
+            repository.updateListingPrice(listingId, newPrice)
+        }
+    }
 }

@@ -15,9 +15,9 @@ class FakeMarketRepository @Inject constructor() : MarketRepository {
 
     private val listings = MutableStateFlow<List<Listing>>(
         listOf(
-            Listing("1", "f1", "Tomato", 500.0, 25.0, Date(), listOf("https://cdn.pixabay.com/photo/2011/03/16/16/01/tomatoes-5356_1280.jpg")),
-            Listing("2", "f2", "Onion", 1200.0, 35.0, Date(), listOf("https://cdn.pixabay.com/photo/2016/05/04/13/46/onion-1371434_1280.jpg")),
-            Listing("3", "f3", "Potato", 800.0, 18.0, Date(), listOf("https://cdn.pixabay.com/photo/2016/08/11/08/04/potatoes-1585060_1280.jpg"))
+            Listing("1", "f1", "Tomato", 500.0, 25.0, Date(), emptyList()),
+            Listing("2", "f2", "Onion", 1200.0, 35.0, Date(), emptyList()),
+            Listing("3", "f3", "Potato", 800.0, 18.0, Date(), emptyList())
         )
     )
 
@@ -92,6 +92,14 @@ class FakeMarketRepository @Inject constructor() : MarketRepository {
         delay(500)
         trips.value = trips.value.map {
             if (it.id == tripId) it.copy(status = TripStatus.valueOf(status)) else it
+        }
+        return Result.success(Unit)
+    }
+
+    override suspend fun updateListingPrice(listingId: String, newPrice: Double): Result<Unit> {
+        delay(500)
+        listings.value = listings.value.map {
+            if (it.id == listingId) it.copy(pricePerKg = newPrice) else it
         }
         return Result.success(Unit)
     }

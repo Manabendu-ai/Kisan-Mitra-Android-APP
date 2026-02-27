@@ -17,4 +17,5 @@ interface MarketRepository {
     suspend fun placeOrder(order: Order): Result<Unit>
     fun getTrips(): Flow<List<Trip>>
     suspend fun updateTripStatus(tripId: String, status: String): Result<Unit>
+    suspend fun updateListingPrice(listingId: String, newPrice: Double): Result<Unit>
 }
