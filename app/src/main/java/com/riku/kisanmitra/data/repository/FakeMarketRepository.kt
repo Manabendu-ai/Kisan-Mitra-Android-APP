@@ -9,17 +9,12 @@ import kotlinx.coroutines.flow.flow
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.random.Random
 
 @Singleton
 class FakeMarketRepository @Inject constructor() : MarketRepository {
 
-    private val listings = MutableStateFlow<List<Listing>>(
-        listOf(
-            Listing("1", "f1", "Tomato", 500.0, 25.0, Date(), emptyList()),
-            Listing("2", "f2", "Onion", 1200.0, 35.0, Date(), emptyList()),
-            Listing("3", "f3", "Potato", 800.0, 18.0, Date(), emptyList())
-        )
-    )
+    private val listings = MutableStateFlow<List<Listing>>(emptyList())
 
     private val trips = MutableStateFlow<List<Trip>>(
         listOf(
@@ -52,14 +47,42 @@ class FakeMarketRepository @Inject constructor() : MarketRepository {
 
     override suspend fun getAiPriceAdvice(cropType: String, quantity: Double): Result<AiPriceAdvice> {
         delay(1500)
+        
+        // Base prices for randomization
+        val basePrice = when (cropType.lowercase(Locale.ROOT).trim()) {
+            "tomato" -> 28.0
+            "onion" -> 42.0
+            "potato" -> 20.0
+            "green chili" -> 65.0
+            else -> 30.0
+        }
+
+        // Generate realistic fluctuations
+        val currentPrice = basePrice + Random.nextDouble(-2.0, 2.0)
+        val predicted24h = currentPrice * (1 + Random.nextDouble(-0.15, 0.15))
+        val predicted48h = predicted24h * (1 + Random.nextDouble(-0.10, 0.10))
+        val confidence = Random.nextDouble(0.75, 0.98)
+
+        val (recommendation, reason) = when {
+            predicted24h > currentPrice * 1.05 -> {
+                "HOLD" to "Price is expected to rise by ${( (predicted24h/currentPrice - 1) * 100).toInt()}% in the next 24h due to low arrivals in major Mandis."
+            }
+            predicted24h < currentPrice * 0.95 -> {
+                "SELL NOW" to "Market supply is increasing rapidly. Prices may drop further by ${( (1 - predicted24h/currentPrice) * 100).toInt()}% by tomorrow."
+            }
+            else -> {
+                "SELL" to "Market is stable. Current prices are fair based on quality and seasonal trends."
+            }
+        }
+
         return Result.success(
             AiPriceAdvice(
-                currentPrice = 25.0,
-                predicted24h = 27.5,
-                predicted48h = 24.0,
-                confidence = 0.92,
-                recommendation = "SELL NOW",
-                reasonText = "Price is expected to peak in 24h due to high demand in nearby Mandi, but will drop as new supply arrives from neighboring districts."
+                currentPrice = String.format("%.2f", currentPrice).toDouble(),
+                predicted24h = String.format("%.2f", predicted24h).toDouble(),
+                predicted48h = String.format("%.2f", predicted48h).toDouble(),
+                confidence = String.format("%.2f", confidence).toDouble(),
+                recommendation = recommendation,
+                reasonText = reason
             )
         )
     }
